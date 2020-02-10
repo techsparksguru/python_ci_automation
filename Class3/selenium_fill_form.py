@@ -19,8 +19,8 @@ browser.implicitly_wait(30)
 # Find the form-fields
 form_area = browser.find_element_by_xpath('//*[@id="presscore-contact-form-widget-3"]/form/div')
 form_fields = form_area.find_elements_by_tag_name('input')
-form_fields = form_fields[2::]
 
+# Iterate through the fields and fill the 
 for field in form_fields:
     print("Filling the field {}".format(field.get_attribute('name')))
     if field.get_attribute('name') == 'telephone':
@@ -29,7 +29,6 @@ for field in form_fields:
             field.send_keys('abc@xyz.com')
     else:
         field.send_keys('TestField')
-    browser.implicitly_wait(15)
 
 
 # Message Field
