@@ -13,7 +13,7 @@ virtualenv C:\envs\seleniumpractice
 C:\envs\seleniumpractice\Scripts\activate.bat
 ```
 
-### Installing Selenium via pip
+### Installing Selenium using pip
 pip install selenium==3.141.0
 
 

@@ -7,6 +7,8 @@ browser = webdriver.Chrome()
 # GoTo (Go to a URL)
 browser.get("http://www.seleniumframework.com/python-course/")
 
+browser.maximize_window()
+
 # Locate element using XPATH
 name = browser.find_element_by_xpath('//*[@id="presscore-contact-form-widget-3"]/form/div/span[1]/input')
 

@@ -6,6 +6,7 @@ browser = webdriver.Chrome()
 
 # GoTo (Go to a URL)
 browser.get("http://www.seleniumframework.com")
+browser.maximize_window()
 
 # Print Browser Name
 browser.Name
