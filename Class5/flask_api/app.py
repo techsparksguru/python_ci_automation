@@ -3,9 +3,8 @@ import json
 from datetime import timedelta
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import safe_str_cmp
-from flask_url_discovery import url_discovery
 from flask_jwt import JWT, jwt_required, current_identity
-from flask import Flask, jsonify, make_response, request, abort, Blueprint, url_for
+from flask import Flask, jsonify, make_response, request, abort, url_for
 
 
 class User(object):
@@ -83,10 +82,6 @@ app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=36000)
 app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
 app.config['JWT_AUTH_URL_RULE'] = '/login'
 
-
-url_discovery(app)
-
-app_bp = Blueprint('my_bp', __name__)
 jwt = JWT(app, authenticate, identity)
 
 @app.errorhandler(404)
@@ -264,13 +259,17 @@ def delete_task_v3(task_id):
     return jsonify({'result': True})
 
 
-@app.route("/index")
+@app.route("/")
 def all_links():
-    links = {}
+    links = []
+    methods = []
     for rule in app.url_map.iter_rules():
-        links.update((url, rule.endpoint))
-    return render_template("index.html", links=links)
-    
+        links.append(rule.rule)
+        methods.append(list(rule.methods))
+    endpoints = list(zip(links, methods))
+    endpoints.pop()
+    endpoints.pop(8)
+    return jsonify({'endpoints': endpoints})
+
 if __name__ == '__main__':
-    app.register_blueprint(app_bp)
     app.run()
