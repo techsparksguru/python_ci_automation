@@ -1,0 +1,4 @@
+flask
+flask_jwt
+flask_httpauth
+Flask-UrlDiscovery

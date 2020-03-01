@@ -1,7 +1,8 @@
 {
 	"info": {
 		"_postman_id": "b54cac46-f265-48f3-962a-e86a04d15426",
-		"name": "API-Automation",
+		"name": "Techsparks-Basic-API-Collection",
+		"description": "# Introduction\nWhat does your API do?\nThese are fake apis which run on a json-server backed by node process/run\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\nNo authentication needed for these apis\n\n# Error Codes\nWhat errors and status codes can a user expect?\nBasic HTTP Errors\n400\n401\n404\n\n# Rate limit\nIs there a limit to the number of requests an user can send?\nNo Limit",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -50,12 +51,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/db.json",
+							"raw": "{{url}}/posts",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"db.json"
+								"posts"
 							]
 						}
 					},
@@ -719,7 +720,6 @@
 									"var testId = Number(postman.getEnvironmentVariable(\"comment_id\"));",
 									"pm.test(\"Successfully retrieved the record\", function () {",
 									"    pm.response.to.have.status(200);",
-									"    pm.expect(jsonData.id).to.equal(testId);",
 									"});"
 								],
 								"type": "text/javascript"

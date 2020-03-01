@@ -1,6 +1,6 @@
 # Getting started
 
-Install nodejs on by selecting package for your OS from the below link
+Install nodejs on by selecting the package for your OS from the below link
 ```
 https://nodejs.org/en/download/
 ```
@@ -70,23 +70,10 @@ GET /posts?id=1&id=2
 GET /comments?author.name=typicode
 ```
 
-### Add custom routes
-
-Create a `routes.json` file. Pay attention to start every route with `/`.
-
-```json
-{
-  "/api/*": "/$1",
-  "/:resource/:id/show": "/:resource/:id",
-  "/posts/:category": "/posts?category=:category",
-  "/articles\\?id=:id": "/posts/:id"
-}
-```
-
-Start JSON Server with `--routes` option.
+Set static files directory
 
 ```cmd
-json-server --watch db.json --routes routes.json --static .
+json-server --watch db.json --routes routes.json --static <path to the static files directory>
 ```
 
 ### CLI usage
@@ -121,13 +108,3 @@ Examples:
 
 https://github.com/typicode/json-server
 ```
-
-You can also set options in a `json-server.json` configuration file.
-
-```json
-{
-  "port": 3000
-}
-```
-
-

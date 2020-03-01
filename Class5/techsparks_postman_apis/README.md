@@ -1,6 +1,9 @@
  
 # Installing Postman
-Follow the instructions at https://www.getpostman.com/
+Follow the instructions at below link 
+```
+https://www.getpostman.com/
+```
 
 # Import collections
 Clone the repository or download the zip of it
