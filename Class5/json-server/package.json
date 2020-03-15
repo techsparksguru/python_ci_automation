@@ -1,0 +1,10 @@
+{
+  "name": "json-api-server",
+  "description": "Building dependencies for the api-testing on json-server and using newman",
+  "repository": "git@github.com:techsparksguru/python_ci_automation.git",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^0.16.1",
+    "newman": "^4.5.7"
+  }
+}

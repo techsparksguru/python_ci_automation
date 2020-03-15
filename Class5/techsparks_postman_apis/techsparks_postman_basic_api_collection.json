@@ -1,0 +1,1876 @@
+{
+	"info": {
+		"_postman_id": "b54cac46-f265-48f3-962a-e86a04d15426",
+		"name": "Techsparks-Basic-API-Collection",
+		"description": "# Introduction\nWhat does your API do?\nThese are fake apis which run on a json-server backed by node process/run\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\nNo authentication needed for these apis\n\n# Error Codes\nWhat errors and status codes can a user expect?\nBasic HTTP Errors\n400\n401\n404\n\n# Rate limit\nIs there a limit to the number of requests an user can send?\nNo Limit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "Get the Posts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e2fef5b-31c1-4b08-8c82-3dde949a2b4d",
+								"exec": [
+									"pm.test(\"Successfully lists all the posts\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "HelloSuhas@89",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "suhas.manju89@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"    postman.setEnvironmentVariable(\"post_id\", jsonData.id);",
+									"    postman.setEnvironmentVariable(\"userId\", jsonData.userId);",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{$randomInt}}\",\n    \"title\": \"techsparks\",\n    \"body\": \"My Post - {{$randomInt}} from techsparks - API Testing\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/posts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\": \"POST\"\n}"
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Retrieve a Post with ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e2fef5b-31c1-4b08-8c82-3dde949a2b4d",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"var testId = Number(postman.getEnvironmentVariable(\"post_id\"));",
+									"pm.test(\"Successfully retrieved the record\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData.id).to.equal(testId);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts/{{post_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts",
+								"{{post_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT - Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.test(\"Updating the post\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+									"    pm.expect(jsonData.title).to.eql(\"Test@123\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"36\",\n    \"title\": \"Test@123\",\n    \"body\": \"This is an updated record\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/posts/{{post_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts",
+								"{{post_id}}"
+							]
+						},
+						"description": "Update a post"
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\": \"POST\"\n}"
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT - Partially Update Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.test(\"Updating the post\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+									"    pm.expect(jsonData.title).to.eql(\"Title updated by suhas@techsparks.com\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Title updated by suhas@techsparks.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/posts/{{post_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts",
+								"{{post_id}}"
+							]
+						},
+						"description": "Update a post"
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\": \"POST\"\n}"
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "Get the Comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e2fef5b-31c1-4b08-8c82-3dde949a2b4d",
+								"exec": [
+									"pm.test(\"Successfully lists all the posts\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/comments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment to a post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"    postman.setEnvironmentVariable(\"comment_id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\": \"{{post_id}}\",\n    \"name\": \"Pradeep\",\n    \"email\": \"pradeep@techsparks.com\",\n    \"body\": \"This is a comment by techsparks user - {{userId}} on post {{post_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/comments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\": \"POST\"\n}"
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Retrieve comments with ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e2fef5b-31c1-4b08-8c82-3dde949a2b4d",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"var testId = Number(postman.getEnvironmentVariable(\"comment_id\"));",
+									"pm.test(\"Successfully retrieved the record\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData.id).to.equal(testId);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/comments/{{comment_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comments",
+								"{{comment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query comments with email or name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e2fef5b-31c1-4b08-8c82-3dde949a2b4d",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"var testId = Number(postman.getEnvironmentVariable(\"comment_id\"));",
+									"pm.test(\"Successfully retrieved the record\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/comments/?name=Suhas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comments",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Suhas"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT - Update Comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.test(\"Updating the post\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+									"    pm.expect(jsonData.email).to.eql(\"suhas.manju89@gmail.com\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"postId\": \"{{post_id}}\",\n\t\"name\": \"Suhas\",\n\t\"email\": \"suhas.manju89@gmail.com\",\n\t\"body\": \"This is a test comment\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/comments/{{comment_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comments",
+								"{{comment_id}}"
+							]
+						},
+						"description": "Update a post"
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\": \"POST\"\n}"
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PATCH - Partially update content",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.test(\"Updating the post\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+									"    pm.expect(jsonData.email).to.eql(\"suhas.manju89@gmail.com\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"body\": \"This is a comment by techsparks user - {{userId}} on post {{post_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/comments/{{comment_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comments",
+								"{{comment_id}}"
+							]
+						},
+						"description": "Update a post"
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\": \"POST\"\n}"
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "Get profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e2fef5b-31c1-4b08-8c82-3dde949a2b4d",
+								"exec": [
+									"pm.test(\"Successfully lists all the user profiles\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"    postman.setEnvironmentVariable(\"profile_id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\":\"Suhas Manjunath\",\n   \"username\":\"suhimanju\",\n   \"email\":\" info@techsparks.guru\",\n   \"address\":{\n      \"street\":\"{{$randomStreetName}}\",\n      \"suite\":\"Suite-{{$randomInt}}\",\n      \"city\":\"{{$randomCity}}\",\n      \"zipcode\":\"{{$randomZipCode}}\",\n      \"geo\":{\n         \"lat\":\"{{$randomLatitude}}\",\n         \"lng\":\"{{$randomLongitude}}\"\n      }\n   },\n   \"phone\":\"+1.202.649.0837\",\n   \"website\":\"http://www.techsparks.guru/\",\n   \"company\":{\n      \"name\":\"Techsparks\",\n      \"catchPhrase\":\"{{$randomCatchPhrase}}\",\n      \"bs\":\"{{$randomBs}}\"\n   }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\": \"POST\"\n}"
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Retrieve a Post with ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e2fef5b-31c1-4b08-8c82-3dde949a2b4d",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"var testId = Number(postman.getEnvironmentVariable(\"profile_id\"));",
+									"pm.test(\"Successfully retrieved the record\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData.id).to.equal(testId);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/profile/{{profile_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile",
+								"{{profile_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT - Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.test(\"Updating the post\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+									"    pm.expect(jsonData.email).to.eql(String(\"info@techsparks.guru\"))",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\":\"{{$randomFullName}}\",\n   \"username\":\"{{$randomUserName}}\",\n   \"email\":\"info@techsparks.guru\",\n   \"address\":{\n      \"street\":\"{{$randomStreetName}}\",\n      \"suite\":\"Suite-{{$randomInt}}\",\n      \"city\":\"{{$randomCity}}\",\n      \"zipcode\":\"{{$randomZipCode}}\",\n      \"geo\":{\n         \"lat\":\"{{$randomLatitude}}\",\n         \"lng\":\"{{$randomLongitude}}\"\n      }\n   },\n   \"phone\":\"{{$randomPhoneNumber}}\",\n   \"website\":\"{{$randomUrl}}\",\n   \"company\":{\n      \"name\":\"{{$randomCompanyName}}\",\n      \"catchPhrase\":\"{{$randomCatchPhrase}}\",\n      \"bs\":\"{{$randomBs}}\"\n   }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/profile/{{profile_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile",
+								"{{profile_id}}"
+							]
+						},
+						"description": "Update a post"
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\": \"POST\"\n}"
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PATCH - Partially update a user profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.test(\"Updating the post\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+									"    pm.expect(jsonData.email).to.eql(\"info@techsparks.guru\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\":\"Pradeep Macharla\",\n   \"username\":\"pmacharla\",\n   \"email\":\"info@techsparks.guru\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/profile/{{profile_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"profile",
+								"{{profile_id}}"
+							]
+						},
+						"description": "Update a post"
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\": \"POST\"\n}"
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "376"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "DELETE - Delete a post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+						"exec": [
+							"pm.test(\"Deleting record was successful or record doesn't exist\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/posts/{{post_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"posts",
+						"{{post_id}}"
+					]
+				},
+				"description": "Update a post"
+			},
+			"response": [
+				{
+					"name": "Success response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"method\": \"POST\"\n}"
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Length",
+							"value": "376"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE - Delete a comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+						"exec": [
+							"pm.test(\"Deleting record was successful or record doesn't exist\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/comments/{{comment_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"comments",
+						"{{comment_id}}"
+					]
+				},
+				"description": "Update a post"
+			},
+			"response": [
+				{
+					"name": "Success response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"method\": \"POST\"\n}"
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Length",
+							"value": "376"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE - Delete a user profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+						"exec": [
+							"pm.test(\"Deleting record was successful or record doesn't exist\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,404]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c7a5f418-85da-46bc-abef-d97ef93a6183",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/profile/{{profile_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"profile",
+						"{{profile_id}}"
+					]
+				},
+				"description": "Update a post"
+			},
+			"response": [
+				{
+					"name": "Success response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"method\": \"POST\"\n}"
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Length",
+							"value": "376"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "06d2bb9a-e55f-431e-b124-98ce9a7c4fd8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "99d9d036-7a45-484d-9164-35ba6cdd3c7c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
