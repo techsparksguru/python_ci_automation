@@ -9,7 +9,7 @@ browser.get("http://www.seleniumframework.com")
 browser.maximize_window()
 
 # Print Browser Name
-browser.Name
+browser.name
 
 # Browser Back 
 browser.back()

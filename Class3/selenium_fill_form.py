@@ -24,7 +24,7 @@ form_fields.append(form_area.find_element_by_tag_name('textarea'))
 
 # Iterate through the fields and fill the 
 for field in form_fields:
-    if field.get_attribute('aria-required')=='true'):
+    if field.get_attribute('aria-required')=='true':
         print("Filling the required field {}".format(field.get_attribute('name')))
     else:
         print("Filling the field {}".format(field.get_attribute('name')))

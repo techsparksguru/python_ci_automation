@@ -7,9 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import * 
 
 browser = webdriver.Chrome()
-browser.get("http://www.seleniumframework.com/python-course/"
+browser.get("http://www.seleniumframework.com/python-course/")
 browser.maximize_window()
-)
+
 browser.implicitly_wait(10)
 
 try:
