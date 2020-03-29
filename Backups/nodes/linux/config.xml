@@ -1,0 +1,20 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<slave>
+  <name>linux</name>
+  <description>This is a linux node</description>
+  <remoteFS>/var/lib/jenkins</remoteFS>
+  <numExecutors>1</numExecutors>
+  <mode>NORMAL</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <launcher class="hudson.slaves.JNLPLauncher">
+    <workDirSettings>
+      <disabled>false</disabled>
+      <workDirPath>/home/ubuntu/jenkins</workDirPath>
+      <internalDir>remoting</internalDir>
+      <failIfWorkDirIsMissing>false</failIfWorkDirIsMissing>
+    </workDirSettings>
+    <webSocket>false</webSocket>
+  </launcher>
+  <label>linux</label>
+  <nodeProperties/>
+</slave>
