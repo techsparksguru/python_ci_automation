@@ -3,8 +3,8 @@ import time
 # Import webdriver module from selenium
 from selenium import webdriver
 
-# import selenium exceptions module
-from selenium.common.exceptions import *
+# # import selenium exceptions module
+# from selenium.common.exceptions import *
 
 # import keys module
 from selenium.webdriver.common.keys import Keys
