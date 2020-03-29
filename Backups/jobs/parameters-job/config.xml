@@ -1,0 +1,91 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.38">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.6.0"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.6.0">
+      <jobProperties/>
+      <triggers/>
+      <parameters>
+        <string>CHOICE</string>
+        <string>BIOGRAPHY</string>
+        <string>PERSON</string>
+        <string>PASSWORD</string>
+        <string>TOGGLE</string>
+      </parameters>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>PERSON</name>
+          <description>Who should I say hello to?</description>
+          <defaultValue>Mr Jenkins</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>BIOGRAPHY</name>
+          <description>Enter some information about the person</description>
+          <defaultValue></defaultValue>
+          <trim>false</trim>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>TOGGLE</name>
+          <description>Toggle this value</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>CHOICE</name>
+          <description>Pick something</description>
+          <choices>
+            <string>One</string>
+            <string>Two</string>
+            <string>Three</string>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>PASSWORD</name>
+          <description>Enter a password</description>
+          <defaultValue>{AQAAABAAAAAQBY5PUelcUZyfVHihJdsry5DnrJJNxP4S1hy1OW6RaNM=}</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.80">
+    <script>pipeline {
+    agent any
+    parameters {
+        string(name: &apos;PERSON&apos;, defaultValue: &apos;Mr Jenkins&apos;, description: &apos;Who should I say hello to?&apos;)
+
+        text(name: &apos;BIOGRAPHY&apos;, defaultValue: &apos;&apos;, description: &apos;Enter some information about the person&apos;)
+
+        booleanParam(name: &apos;TOGGLE&apos;, defaultValue: true, description: &apos;Toggle this value&apos;)
+
+        choice(name: &apos;CHOICE&apos;, choices: [&apos;One&apos;, &apos;Two&apos;, &apos;Three&apos;], description: &apos;Pick something&apos;)
+
+        password(name: &apos;PASSWORD&apos;, defaultValue: &apos;SECRET&apos;, description: &apos;Enter a password&apos;)
+    }
+    stages {
+        stage(&apos;Example&apos;) {
+            steps {
+                echo &quot;Hello ${params.PERSON}&quot;
+
+                echo &quot;Biography: ${params.BIOGRAPHY}&quot;
+
+                echo &quot;Toggle: ${params.TOGGLE}&quot;
+
+                echo &quot;Choice: ${params.CHOICE}&quot;
+
+                echo &quot;Password: ${params.PASSWORD}&quot;
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

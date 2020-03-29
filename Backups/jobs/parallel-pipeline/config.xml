@@ -1,0 +1,47 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.37">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.6.0"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.6.0">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description>This job describes the execution of multiple stages in parallel</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.80">
+    <script>pipeline {
+  agent none
+  stages {
+    stage(&apos;Run Tests&apos;) {
+      parallel {
+        stage(&apos;Test On Windows&apos;) {
+          agent {
+            label &quot;windows&quot;
+          }
+          steps {
+            bat &quot;mkdir testdir&quot;
+            bat &quot;dir&quot;
+          }
+        }
+        stage(&apos;Test On Linux&apos;) {
+          agent {
+            label &quot;linux&quot;
+          }
+          steps {
+            sh &apos;mkdir testdir{1..10}&apos;
+            sh &quot;ls -la&quot;
+          }
+        }
+      }
+    }
+  }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
