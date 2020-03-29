@@ -15,6 +15,8 @@ ls Backups
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
+git config --global user.email "suhas.manju89@gmail.com"
+
 git add --all
 git commit -m "Automated Jenkins commit - ${BACKUP_DATE}"
 git push origin jenkins_backup
