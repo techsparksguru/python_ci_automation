@@ -8,7 +8,7 @@ __pycache__/
 
 # Jenkins Builds directory 
 builds/
-*.@tmp/
+python_ci_automation@tmp/
 
 # Distribution / packaging
 .Python
