@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Jenkins Builds directory 
+builds/
+
 # Distribution / packaging
 .Python
 build/
