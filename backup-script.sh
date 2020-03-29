@@ -13,5 +13,5 @@ cp -R $JENKINS_HOME/nodes Backups/nodes
 ls Backups
 
 git add --all
-git commit -m "Automated Jenkins commit - $BACKUP_DATE"
+git commit -m "Automated Jenkins commit - " + $BACKUP_DATE
 git push origin jenkins_backup
