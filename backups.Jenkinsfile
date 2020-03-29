@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'master'
     }
+    triggers {
+        cron('30 23 * * 6')
+    }
     stages {
         stage('Copy jobs and its configurations') {
             steps {
