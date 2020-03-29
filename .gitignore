@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# Jenkins Builds directory 
+builds/
+python_ci_automation@tmp/
+
 # Distribution / packaging
 .Python
 build/
