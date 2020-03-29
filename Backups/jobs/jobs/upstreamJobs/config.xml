@@ -1,0 +1,73 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.37">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.6.0"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.6.0">
+      <jobProperties/>
+      <triggers>
+        <string>jenkins.triggers.ReverseBuildTrigger</string>
+      </triggers>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers>
+        <jenkins.triggers.ReverseBuildTrigger>
+          <spec></spec>
+          <upstreamProjects>buildTrigger, parallel-pipeline</upstreamProjects>
+          <threshold>
+            <name>SUCCESS</name>
+            <ordinal>0</ordinal>
+            <color>BLUE</color>
+            <completeBuild>true</completeBuild>
+          </threshold>
+        </jenkins.triggers.ReverseBuildTrigger>
+      </triggers>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.80">
+    <script>pipeline {
+   agent {
+      label &apos;windows&apos;
+   }
+   triggers {
+      //Execute when either job1 or job2 are successful
+      upstream(upstreamProjects: &apos;buildTrigger, parallel-pipeline&apos;, threshold: hudson.model.Result.SUCCESS)
+   }
+   stages {
+      stage(&apos;console&apos;) {
+         steps {
+            echo &quot;Printing on the console&quot;
+         }
+      }
+      stage(&apos;write&apos;) {
+         steps {
+            bat &quot;echo writing this to the file &gt; file.txt&quot;
+         }
+      }
+      stage(&apos;delete&apos;) {
+         steps {
+            bat &quot;del file.txt&quot;
+         }
+      }
+      stage(&apos;create&apos;) {
+         steps {
+            bat &quot;mkdir test_directory&quot;
+         }
+      }
+      stage(&apos;list&apos;) {
+         steps {
+            bat &quot;dir&quot;
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
