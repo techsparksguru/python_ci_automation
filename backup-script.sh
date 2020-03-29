@@ -12,6 +12,9 @@ cp -R $JENKINS_HOME/userContent Backups/userContent
 cp -R $JENKINS_HOME/nodes Backups/nodes
 ls Backups
 
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
 git add --all
-git commit -m "Automated Jenkins commit - " + $BACKUP_DATE
+git commit -m "Automated Jenkins commit - ${BACKUP_DATE}"
 git push origin jenkins_backup
