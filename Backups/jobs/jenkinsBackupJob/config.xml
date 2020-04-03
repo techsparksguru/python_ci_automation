@@ -17,7 +17,7 @@
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
       <triggers>
         <hudson.triggers.TimerTrigger>
-          <spec>30 23 * * 6</spec>
+          <spec>H 23 * * 0</spec>
         </hudson.triggers.TimerTrigger>
       </triggers>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
@@ -28,7 +28,7 @@
         label &apos;master&apos;
     }
     triggers {
-        cron(&apos;30 23 * * 6&apos;)
+        cron(&apos;H 23 * * 0&apos;)
     }
     stages {
         stage(&apos;Copy jobs and its configurations&apos;) {
