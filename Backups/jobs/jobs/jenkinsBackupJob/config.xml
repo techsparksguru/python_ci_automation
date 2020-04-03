@@ -28,7 +28,7 @@
             steps {
                 script {
                     def date = new Date()
-                    def commit_date = date.format(&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSSZ&quot;)
+                    def commit_date = date.format(&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss&quot;)
                     println &quot;${commit_date}&quot;
                     dir(&apos;python_ci_automation&apos;) {
                         sh &apos;git add --all&apos;
