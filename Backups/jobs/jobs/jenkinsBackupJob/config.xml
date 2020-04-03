@@ -32,7 +32,7 @@
                     println &quot;${commit_date}&quot;
                     dir(&apos;python_ci_automation&apos;) {
                         sh &apos;git add --all&apos;
-                        sh &apos;git commit -m &quot;Automated Jenkins commit - ${commit_date}&quot;&apos;
+                        sh &quot;git commit -m &apos;Automated Jenkins commit ${commit_date}&apos;&quot;
                         sh &apos;git push origin jenkins_backup&apos;
                     }
                 }
