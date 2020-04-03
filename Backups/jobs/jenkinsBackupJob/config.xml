@@ -4,32 +4,49 @@
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.6.0"/>
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.6.0">
       <jobProperties/>
-      <triggers/>
+      <triggers>
+        <string>hudson.triggers.TimerTrigger</string>
+      </triggers>
       <parameters/>
       <options/>
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
   <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties/>
+  <properties>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers>
+        <hudson.triggers.TimerTrigger>
+          <spec>30 23 * * 6</spec>
+        </hudson.triggers.TimerTrigger>
+      </triggers>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+  </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.80">
-    <script>pipeline {
+    <script>    pipeline {
     agent {
         label &apos;master&apos;
+    }
+    triggers {
+        cron(&apos;30 23 * * 6&apos;)
     }
     stages {
         stage(&apos;Copy jobs and its configurations&apos;) {
             steps {
-                git branch: &apos;jenkins_backup&apos;, credentialsId: &apos;	ssh_jenkins_credential&apos;, url: &apos;git@github.com:techsparksguru/python_ci_automation.git&apos;
-                sh &quot;chown -R jenkins:jenkins *&quot;
+                git branch: &apos;jenkins_backup&apos;, credentialsId: &apos;ssh_jenkins_credential&apos;, url: &apos;git@github.com:techsparksguru/python_ci_automation.git&apos;                    
                 sh &apos;./backup-script.sh&apos;
-                script {
+            }
+        }
+        stage(&apos;Backup files by pushing into the git repo&apos;) {
+            steps {
+                    script {
                     def date = new Date()
                     def commit_date = date.format(&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss&quot;)
+                    def commit_msg = &quot;Automated Jenkins commit - ${commit_date}&quot;
                     println &quot;${commit_date}&quot;
                     dir(&apos;python_ci_automation&apos;) {
                         sh &apos;git add --all&apos;
-                        sh &quot;git commit -m &apos;Automated Jenkins commit - ${commit_date}&apos;&quot;
+                        sh &quot;git commit -m &apos;${commit_msg}&apos;&quot;
                         sh &apos;git push origin jenkins_backup&apos;
                     }
                 }
