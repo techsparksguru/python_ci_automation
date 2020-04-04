@@ -14,11 +14,11 @@ browser.implicitly_wait(10)
 
 try:
     element = WebDriverWait(browser, 10).until(
-        EC.presence_of_all_elements_located((By.TAG_NAME, "ddlslskdfdasdf"))
+        EC.presence_of_all_elements_located((By.TAG_NAME, "randomtag"))
     )
 except TimeoutException:
     print("Encounted timeout while waiting for the element")
 else:
-    print("Successfully located all the elements by tag name <input>")
+    print("Successfully located all the elements by tag name")
 
 browser.quit()
