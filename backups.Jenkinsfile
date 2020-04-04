@@ -2,8 +2,10 @@ pipeline {
     agent {
         label 'master'
     }
+
+    // Triggers function runs the job automatically based on cron date-time specified
     triggers {
-        cron('30 23 * * 6')
+        cron('H 23 * * 6')
     }
     stages {
         stage('Copy jobs and its configurations') {
