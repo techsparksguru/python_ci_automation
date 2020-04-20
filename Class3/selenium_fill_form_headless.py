@@ -3,8 +3,14 @@ import time
 # Import webdriver module from selenium
 from selenium import webdriver
 
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--window-size=1920x1080")
+
 # Create a webdriver instance for chrome browser
-browser = webdriver.Chrome()
+browser = webdriver.Chrome(chrome_options=chrome_options)
 
 # GoTo (Go to a URL)
 browser.get("http://www.seleniumframework.com/python-course/")
