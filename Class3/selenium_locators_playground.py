@@ -13,7 +13,7 @@ browser.maximize_window()
 name = browser.find_element_by_xpath('//*[@id="presscore-contact-form-widget-3"]/form/div/span[1]/input')
 
 # Locate element using ID and store it in a variable
-email = browser.find_element_by_id("form-validation-field-1")
+recent_posts = browser.find_element_by_id("recent-posts-3")
 
 # Locate element by NAME
 telephone = browser.find_element_by_name("telephone")
@@ -52,3 +52,6 @@ browser.find_element_by_xpath('//*[@id="presscore-contact-form-widget-3"]/form/p
 
 error_log = browser.find_element_by_xpath('/html/body/div[1]/div[2]/div[2]/div/aside/div/section[2]/form/div/span[1]/div/div[1]').text
 assert error_log == "* This field is required"
+
+# quit browser
+browser.quit()

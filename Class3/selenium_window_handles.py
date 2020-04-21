@@ -12,6 +12,7 @@ subscribe = browser.find_element_by_xpath('//*[@id="text-11"]/div/form/input[3]'
 
 # Get the window handles and switch to the launched window
 window_handles = browser.window_handles
+print(window_handles + '\n')
 browser.switch_to.window(window_handles[1])
 
 browser.maximize_window()
