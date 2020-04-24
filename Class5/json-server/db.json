@@ -11,21 +11,35 @@
       "title": "techsparks",
       "body": "My Post - 321 from techsparks - API Testing",
       "id": 5
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "My Comments - 3 from techsparks - API Testing",
-      "postId": 1
     },
     {
-      "id": 2,
-      "body": "My Comments - 4 from techsparks - API Testing",
-      "postId": 1
+      "userId": "36",
+      "title": "Test@123",
+      "body": "This is an updated record",
+      "id": 6
     }
   ],
+  "comments": [],
   "profile": {
-    "name": "Suhas Profile"
+    "name": "Pradeep Macharla",
+    "username": "pmacharla",
+    "email": "info@techsparks.guru",
+    "address": {
+      "street": "Halvorson Corners",
+      "suite": "Suite-553",
+      "city": "West Gretahaven",
+      "zipcode": "{{$randomZipCode}}",
+      "geo": {
+        "lat": "9.2877",
+        "lng": "132.4622"
+      }
+    },
+    "phone": "698-796-2300",
+    "website": "https://kattie.net",
+    "company": {
+      "name": "Predovic, Ebert and Robel",
+      "catchPhrase": "Multi-channelled impactful synergy",
+      "bs": "seamless aggregate infomediaries"
+    }
   }
 }
