@@ -131,3 +131,18 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# behave
+__pycache__/
+.idea/
+*.log
+failed_scenarios_screenshots/*
+*.zip
+*.html
+*.pyc
+*.exe
+results.json
+reports
+rerun_failing.features
+.pyre/
