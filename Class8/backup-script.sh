@@ -4,7 +4,7 @@
 echo $JENKINS_HOME
 
 # Backup general configurations, job configurations, and user content
-cp -R $JENKINS_HOME/jobs Backups
+cp -R $JENKINS_HOME/jobs jobs
 
 # List the files copied
 ls Backups
