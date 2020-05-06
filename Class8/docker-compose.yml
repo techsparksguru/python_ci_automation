@@ -15,7 +15,9 @@ services:
     networks:
       - jenkins
   jenkins:
-    image: jenkinsci/blueocean
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: jenkinsci-blueocean
     privileged: true
     depends_on: 
