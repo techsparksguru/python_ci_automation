@@ -1,6 +1,6 @@
 import time
+import behave
 
-from behave import *
 from features.lib.pages import *
 
 use_step_matcher("re")

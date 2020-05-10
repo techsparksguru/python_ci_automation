@@ -1,9 +1,11 @@
+import time
+import traceback
+
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import *
-import traceback
-import time
+
 
 class BasePage(object):
 
@@ -39,6 +41,7 @@ class BasePage(object):
                     )
                 except(TimeoutException,StaleElementReferenceException):
                     traceback.print_exc()
+
                 # I could have returned element, however because of lazy loading, I am seeking the element before return
                 return self.find_element(*self.locator_dictionary[what])
         except AttributeError:

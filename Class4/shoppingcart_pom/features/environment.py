@@ -4,6 +4,7 @@ import zipfile
 import shutil
 import time
 import logging
+import traceback
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -14,9 +15,8 @@ from selenium.webdriver.chrome.options import Options
 
 def before_all(context):
     print("Executing before all")
-
-    context.username = "suhas290@gmail.com"
-    context.passwd = "open4all"
+    context.username = os.getenv("EMAIL_ID", "suhas290@gmail.com")
+    context.passwd = os.getenv("PASSWORD", "open4al")
     paths = [
         'seleniumframework_tests.log',
         'failed_scenarios_screenshots'
@@ -31,7 +31,7 @@ def before_all(context):
 
     # Create logger
     # TODO - http://stackoverflow.com/questions/6386698/using-the-logging-python-class-to-write-to-a-file
-    context.logger = logging.getLogger('seleniumframework_tests.log')
+    context.logger = logging.getLogger('seleniumframework_tests')
     hdlr = logging.FileHandler('seleniumframework_tests.log')
     formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     hdlr.setFormatter(formatter)
@@ -84,15 +84,13 @@ def before_scenario(context, scenario):
 
 def after_scenario(context, scenario):
     print("scenario status " + str(scenario.status))
-
     if str(scenario.status) == "Status.failed":
         if not os.path.exists("failed_scenarios_screenshots"):
             os.makedirs("failed_scenarios_screenshots")
         os.chdir("failed_scenarios_screenshots")
         context.browser.save_screenshot(str(scenario.name) + "_failed.png")
         os.chdir("..")
-        context.logger.info("The Scenario: {} failed".format(scenario.name))
-
+        context.logger.error("The Scenario: {} failed due to TimeOut waiting for the element(s)".format(scenario.name))
     elif str(scenario.status) == "Status.passed":
         context.logger.info("The Scenario: {} passed without errors".format(scenario.name))
 
