@@ -90,7 +90,7 @@ def after_scenario(context, scenario):
         os.chdir("failed_scenarios_screenshots")
         context.browser.save_screenshot(str(scenario.name) + "_failed.png")
         os.chdir("..")
-        context.logger.error("The Scenario: {} failed due to TimeOut waiting for the element(s)".format(scenario.name))
+        context.logger.error("The Scenario: {} failed on TimeOut waiting for the element(s)".format(scenario.name))
     elif str(scenario.status) == "Status.passed":
         context.logger.info("The Scenario: {} passed without errors".format(scenario.name))
 
