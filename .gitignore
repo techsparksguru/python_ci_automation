@@ -137,7 +137,7 @@ dmypy.json
 __pycache__/
 .idea/
 *.log
-/failed_scenarios_screenshots/*
+failed_scenarios_screenshots/
 *.zip
 *.html
 *.pyc
