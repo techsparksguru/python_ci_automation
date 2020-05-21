@@ -1,21 +1,12 @@
-import sqlite3
-from sqlite3 import Error
+from utils.helper import *
 
+conn_instance = Connection()
 
-def create_connection():
-    """ create a database connection to a database that resides
-        in the memory
-    """
-    conn = None;
-    try:
-        conn = sqlite3.connect(':memory:')
-        print(sqlite3.version)
-    except Error as e:
-        print(e)
-    finally:
-        if conn:
-            conn.close()
+# Creating database connection of type inmemory
+conn_instance.create_connection(dbtype='inmemory')
 
+# Check the connection establishment
+print(conn_instance)
 
-if __name__ == '__main__':
-    create_connection()
+# Close the connection
+conn_instance.close_connection()

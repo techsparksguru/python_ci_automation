@@ -1,19 +1,12 @@
-import sqlite3
-from sqlite3 import Error
+from utils.helper import *
 
+conn_instance = Connection()
 
-def create_connection(db_file):
-    """ create a database connection to a SQLite database """
-    conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
-    except Error as e:
-        print(e)
-    finally:
-        if conn:
-            conn.close()
+# Creating database connection with custom .db file
+conn_instance.create_connection(dbfile='db/sqlite3.db')
 
+# Check the connection establishment
+print(conn_instance)
 
-if __name__ == '__main__':
-    create_connection("db/pythonsqlite.db")
+# Close the connection
+conn_instance.close_connection()
