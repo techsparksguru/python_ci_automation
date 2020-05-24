@@ -27,9 +27,10 @@ class DBHelper:
     def execute(self, sql):
         self.__connect__()
         self.cur.execute(sql)
+        self.con.commit()
         self.__disconnect__()
 
-    def insert(self, sql, task):
+    def manipulate(self, sql, task):
         self.__connect__()
         self.cur.execute(sql, task)
         self.con.commit()

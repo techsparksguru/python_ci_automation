@@ -9,19 +9,11 @@ sql = ''' UPDATE tasks
                 end_date = ?
             WHERE id = ? '''
 
-cur = conn.cursor()
-cur.execute(sql, task)
-conn.commit()
+updated_task = (5, '2015-01-04', '2015-01-06', 2)
 
+# create tasks
+dbhelper.manipulate(sql, updated_task)
 
-def main():
-    database = "db/pythonsqlite.db"
-
-    # create a database connection
-    conn = create_connection(database)
-    with conn:
-        update_task(conn, (2, '2015-01-04', '2015-01-06', 2))
-
-
-if __name__ == '__main__':
-    main()
+fetch_tasks = ''' SELECT * FROM tasks WHERE id=2; '''
+tasks = dbhelper.fetch(fetch_tasks)
+print(tasks)
