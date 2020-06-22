@@ -1,0 +1,27 @@
+{
+    "user": "suhassubbarao1",
+    "key": "BNcJ1sR5ZspPJxyqi6bs",
+    "server": "hub-cloud.browserstack.com",
+    "capabilities": {
+        "build": "behave-browserstack",
+        "name": "single_test",
+        "browserstack.debug": true
+    },
+    "environments": [
+        {
+            "browser": "chrome"
+        },
+        {
+            "browser": "firefox"
+        },
+        {
+            "browser": "safari"
+        },
+        {
+            "browser": "internet explorer"
+        },
+        {
+            "browser": "opera"
+        }
+    ]
+}
