@@ -8,7 +8,8 @@ __pycache__/
 
 # Jenkins Builds directory 
 builds/
-python_ci_automation@tmp/
+*@tmp/
+nextBuildNumber
 
 # Distribution / packaging
 .Python
@@ -18,7 +19,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -137,7 +137,7 @@ dmypy.json
 __pycache__/
 .idea/
 *.log
-failed_scenarios_screenshots/*
+failed_scenarios_screenshots/
 *.zip
 *.html
 *.pyc
