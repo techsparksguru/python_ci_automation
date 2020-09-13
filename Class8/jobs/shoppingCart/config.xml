@@ -1,0 +1,94 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.40">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.7.2"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.7.2">
+      <jobProperties/>
+      <triggers/>
+      <parameters>
+        <string>BROWSER</string>
+        <string>PASSWORD</string>
+        <string>GIT_BRANCH</string>
+        <string>EMAIL_ID</string>
+      </parameters>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description>This pipeline job executes the Complete Shopping Cart Scenarios and publishes the cucumber reports</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.jira.JiraProjectProperty plugin="jira@3.1.1"/>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>GIT_BRANCH</name>
+          <description>Please input the git branch from which the code should be checkout</description>
+          <defaultValue>master</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BROWSER</name>
+          <description>Enter the desired browser for testing the shopping cart UI Layer</description>
+          <defaultValue>chrome</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>EMAIL_ID</name>
+          <description>Enter your email address for shopping cart website</description>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>PASSWORD</name>
+          <description>Enter your password for shopping cart website</description>
+        </hudson.model.PasswordParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.83">
+    <script>pipeline {
+    agent {
+        label &apos;master&apos;
+    }
+    parameters {
+        string(name: &apos;GIT_BRANCH&apos;,
+            description: &apos;Please input the git branch from which the code should be checkout&apos;,
+            defaultValue: &apos;master&apos;)
+        string(name: &apos;BROWSER&apos;,
+            description: &apos;Enter the desired browser for testing the shopping cart UI Layer&apos;,
+            defaultValue: &apos;chrome&apos;)
+        string(name: &apos;EMAIL_ID&apos;,
+            description: &apos;Enter your email address for shopping cart website&apos;)
+        password(name: &apos;PASSWORD&apos;,
+            description: &apos;Enter your password for shopping cart website&apos;)
+    }
+    
+    stages {
+        stage(&apos;Git Checkout&apos;){
+            steps{
+                git branch: &apos;${GIT_BRANCH}&apos;, url: &apos;https://github.com/techsparksguru/python_ci_automation&apos;
+            }
+        }
+        stage(&apos;Execute Shopping testcases&apos;) {
+            steps {
+                dir(&quot;Class4/shoppingcart_pom&quot;){
+                    // sh &apos;pip3 install -r requirements.txt&apos;
+                    sh &apos;python3 -m behave features -D BROWSER=${BROWSER} -D HEADLESS=True --no-capture --junit&apos;
+		            sh &apos;python3 -m behave2cucumber -i results.json -o cucumber_reports.json&apos;
+                }
+            }
+        }
+    }
+    post {
+    always {
+        dir(&quot;Class4/shoppingcart_pom&quot;){		
+            junit &apos;reports/*.xml&apos;
+	        cucumber failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: &apos;cucumber_reports.json&apos;, pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: &apos;ALPHABETICAL&apos;, undefinedStepsNumber: -1
+         }
+      } // always
+   } // post
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
