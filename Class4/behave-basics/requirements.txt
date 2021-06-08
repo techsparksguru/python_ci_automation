@@ -3,5 +3,5 @@ behave2cucumber==1.0.3
 selenium==3.141.0
 colorama==0.4.3
 openpyxl==3.0.3
-pillow==7.0.0
+pillow==8.2.0
 pyyaml==5.3
